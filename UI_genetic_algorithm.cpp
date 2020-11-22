@@ -8,7 +8,7 @@
 
 UI_genetic_algorithm::UI_genetic_algorithm() {
 
-    vector<tour> cross{POPULATION_SIZE - NUMBER_OF_ELITES};
+    vector<tour> crossover_tour{POPULATION_SIZE - NUMBER_OF_ELITES};
 
     // Generate master list
     master_list::get_instance().setup_master_lists(CITIES_IN_TOUR, LOWER_LIMIT, UPPER_LIMIT);
@@ -38,11 +38,11 @@ UI_genetic_algorithm::UI_genetic_algorithm() {
 
         for (int i = 0; i < (POPULATION_SIZE - NUMBER_OF_ELITES); ++i) {
             vector<tour> parents = select_parents(pop.population);
-            cross[i] = crossover(parents);
+            crossover_tour[i] = crossover(parents);
         }
 
         for (int i = NUMBER_OF_ELITES; i < POPULATION_SIZE; ++i) {
-            pop.population[i] = cross[i - NUMBER_OF_ELITES];
+            pop.population[i] = crossover_tour[i - NUMBER_OF_ELITES];
             pop.population[i].fitness_rate = 0.0;
         }
 
