@@ -1,6 +1,7 @@
-#include <iostream>
+#include "UI_genetic_algorithm.hpp"
 
 int main() {
-    std::cout << "Hello, World!" << std::endl;
+    // start genetic algorithm program
+    UI_genetic_algorithm();
     return 0;
 }
