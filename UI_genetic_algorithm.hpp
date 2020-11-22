@@ -46,6 +46,7 @@ public:
 
     population pop; // population
     tour baseRoute; // tour of base route
+    vector<tour> parent; // parent
 
     // Constructor
     UI_genetic_algorithm();

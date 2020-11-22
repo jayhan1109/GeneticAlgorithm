@@ -37,8 +37,8 @@ UI_genetic_algorithm::UI_genetic_algorithm() {
         }
 
         for (int i = 0; i < (POPULATION_SIZE - NUMBER_OF_ELITES); ++i) {
-            vector<tour> parents = select_parents(pop.population);
-            crossover_tour[i] = crossover(parents);
+            parent = select_parents(pop.population);
+            crossover_tour[i] = crossover(parent);
         }
 
         for (int i = NUMBER_OF_ELITES; i < POPULATION_SIZE; ++i) {
@@ -111,17 +111,15 @@ int UI_genetic_algorithm::fittest_tour(vector<tour> &population) {
 }
 
 vector<tour> UI_genetic_algorithm::select_parents(vector<tour> &population) {
-    int parent_index = 0;
     vector<tour> parents_tour{NUMBER_OF_PARENTS};
     vector<tour> parent_tour_pool{PARENT_POOL_SIZE};
 
     for (int i = 0; i < NUMBER_OF_PARENTS; ++i) {
         for (int j = 0; j < PARENT_POOL_SIZE; ++j) {
-            int tmp = static_cast<int>(rand() % POPULATION_SIZE);
-            parent_tour_pool[j] = population[tmp];
+            parent_tour_pool[j] = population[static_cast<int>(rand() % POPULATION_SIZE)];
         }
-        parent_index = fittest_tour(parent_tour_pool);
-        parents_tour[i] = parent_tour_pool[parent_index];
+
+        parents_tour[i] = parent_tour_pool[fittest_tour(parent_tour_pool)];
     }
     return parents_tour;
 }
